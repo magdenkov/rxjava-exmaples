@@ -1,6 +1,10 @@
+import com.github.jhonnymertz.wkhtmltopdf.wrapper.Pdf;
+import com.github.jhonnymertz.wkhtmltopdf.wrapper.page.PageType;
+import com.github.jhonnymertz.wkhtmltopdf.wrapper.params.Param;
 import rx.Observable;
 import rx.schedulers.Schedulers;
 
+import java.io.IOException;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
 
@@ -12,7 +16,7 @@ public class Library {
         System.out.println("current main thread before future " + Thread.currentThread());
 
         Future<String> ss = Observable.just("1")
-                .subscribeOn(Schedulers.newThread())
+                .subscribeOn(Schedulers.io())
                 .map(s -> {
                     try {
                         Thread.currentThread().sleep(4000l);
@@ -28,7 +32,7 @@ public class Library {
 
 
         Future<String> ss2 = Observable.just("2")
-                .subscribeOn(Schedulers.newThread())
+                .subscribeOn(Schedulers.io())
                 .map(s -> {
 
                     try {
@@ -50,7 +54,25 @@ public class Library {
     }
 
 
-    public static void main(String[] args) throws ExecutionException, InterruptedException {
+    public static void main(String[] args) throws ExecutionException, InterruptedException, IOException {
+
+//        Pdf pdf = new Pdf();
+//
+////        pdf.addPage("<html><head><meta charset=\"utf-8\"></head><h1>Müller</h1></html>", PageType.htmlAsString);
+////        pdf.addPage("http://www.google.com", PageType.url);
+//
+//        pdf.addPageFromUrl("http://localhost:63343/untitled/src/js/soda.html?_ijt=7r8fl5cajuk05un203mkauoq6k");
+//
+//// Add a Table of contents
+//        pdf.addToc();
+//
+//// The `wkhtmltopdf` shell command accepts different types of options such as global, page, headers and footers, and toc. Please see `wkhtmltopdf -H` for a full explanation.
+//// All options are passed as array, for example:
+//        pdf.addParam(new Param("--no-footer-line"), new Param("--header-html", "file:///header.html"));
+//        pdf.addParam(new Param("--enable-javascript"));
+//
+//// Save the PDF
+//        pdf.saveAs("output.pdf");
 
 
 
